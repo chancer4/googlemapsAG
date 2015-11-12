@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Listening to DOM events</title>
     <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
     <meta charset="utf-8">
+    <title>Simple markers</title>
     <style>
       html, body {
         height: 100%;
@@ -18,21 +18,24 @@
   <body>
     <div id="map"></div>
     <script>
+
 function initMap() {
-  var mapDiv = document.getElementById('map');
-  var map = new google.maps.Map(mapDiv, {
-    zoom: 8,
-    center: new google.maps.LatLng(-34.397, 150.644)
+  var myLatLng = {lat: -25.363, lng: 131.044};
+
+  var map = new google.maps.Map(document.getElementById('map'), {
+    zoom: 4,
+    center: myLatLng
   });
 
-  // We add a DOM event here to show an alert if the DIV containing the
-  // map is clicked.
-  google.maps.event.addDomListener(mapDiv, 'click', function() {
-    window.alert('Holy Shit! It works!');
+  var marker = new google.maps.Marker({
+    position: myLatLng,
+    map: map,
+    title: 'Hello World!'
   });
 }
 
     </script>
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB5n9v9CvmHfTqZ_srxo-KkRb6Y3Lunb8E&signed_in=true&callback=initMap" async defer></script>
+    <script async defer
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB5n9v9CvmHfTqZ_srxo-KkRb6Y3Lunb8E&signed_in=true&callback=initMap"></script>
   </body>
 </html>
