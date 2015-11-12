@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Simple click event</title>
+    <title>Listening to DOM events</title>
     <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
     <meta charset="utf-8">
     <style>
@@ -14,41 +14,25 @@
         height: 100%;
       }
     </style>
-
   </head>
   <body>
     <div id="map"></div>
     <script>
 function initMap() {
-  var myLatlng = {lat: -25.363, lng: 131.044};
-
-  var map = new google.maps.Map(document.getElementById('map'), {
-    zoom: 4,
-    center: myLatlng
+  var mapDiv = document.getElementById('map');
+  var map = new google.maps.Map(mapDiv, {
+    zoom: 8,
+    center: new google.maps.LatLng(-34.397, 150.644)
   });
 
-  var marker = new google.maps.Marker({
-    position: myLatlng,
-    map: map,
-    title: 'Click to zoom'
-  });
-
-  map.addListener('center_changed', function() {
-    // 3 seconds after the center of the map has changed, pan back to the
-    // marker.
-    window.setTimeout(function() {
-      map.panTo(marker.getPosition());
-    }, 3000);
-  });
-
-  marker.addListener('click', function() {
-    map.setZoom(8);
-    map.setCenter(marker.getPosition());
+  // We add a DOM event here to show an alert if the DIV containing the
+  // map is clicked.
+  google.maps.event.addDomListener(mapDiv, 'click', function() {
+    window.alert('Holy Shit! It works!');
   });
 }
 
     </script>
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB5n9v9CvmHfTqZ_srxo-KkRb6Y3Lunb8E&signed_in=true&callback=initMap" async defer>
-    </script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB5n9v9CvmHfTqZ_srxo-KkRb6Y3Lunb8E&signed_in=true&callback=initMap" async defer></script>
   </body>
 </html>
